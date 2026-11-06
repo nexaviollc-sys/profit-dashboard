@@ -432,6 +432,7 @@
     }
 
   </style>
+  <link rel="stylesheet" href="./etsy-dashboard.css">
 </head>
 <body>
 <div class="app">
@@ -630,5 +631,6 @@ try{const remembered=Number(localStorage.getItem('zaisenDiscountPct'));if(localS
 for(const link of document.querySelectorAll('.nav a'))link.addEventListener('click',()=>{document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('current'));link.classList.add('current')});
 renderAll();
 </script>
+  <script src="./etsy-dashboard.js"></script>
 </body>
 </html>
