@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5f0">
+  <meta name="description" content="ZAISEN product profitability dashboard: 39 Shopify products, market-by-market courier and contribution estimates.">
+  <title>ZAISEN | Profit Intelligence</title>
+  <style>
+    :root{--bg:#f7f5f0;--paper:#fffefa;--white:#fff;--ink:#262b27;--muted:#7f817d;--line:#e8e8e1;--dark:#272e2a;--dark2:#343c35;--leaf:#2f7652;--leaf-light:#eaf5ed;--earth:#8b6c4d;--gold:#c8ab74;--shadow:0 8px 35px rgba(36,46,40,.035);--serif:Georgia,'Times New Roman',serif;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+    *{box-sizing:border-box} [hidden]{display:none!important} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button,select{cursor:pointer} a{color:inherit}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #92bba2;outline-offset:3px} .app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
+    .sidebar{background:#28312c;color:#f4f5ee;min-height:100vh;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:35px 22px 27px;overflow:hidden;isolation:isolate}
+    .sidebar:before{content:'';width:340px;height:340px;border:1px solid #ffffff0c;position:absolute;border-radius:50%;bottom:-140px;left:-140px;box-shadow:0 0 0 45px #ffffff05,0 0 0 100px #ffffff03;z-index:-1}
+    .brand{margin:0 10px 6px;font-family:var(--serif);letter-spacing:.19em;font-size:29px;line-height:1.2;color:#fcf7e9}.brand-sub{font-size:9px;letter-spacing:.27em;color:#abb4a6;margin:3px 10px 52px;text-transform:uppercase}
+    .nav-kicker{font-size:10px;letter-spacing:.16em;color:#7d8e80;text-transform:uppercase;font-weight:700;padding:0 13px;margin:0 0 14px}.nav{display:flex;flex-direction:column;gap:7px}.nav a{display:flex;align-items:center;gap:12px;padding:14px 13px;text-decoration:none;color:#c0c8bf;border:1px solid transparent;border-radius:12px;font-size:12px;transition:.2s}.nav a:hover,.nav a.current{color:white;background:#ffffff0e;border-color:#ffffff16}.nav a.current:before{content:'';width:3px;height:19px;border-radius:3px;background:#c7a778;position:absolute;left:21px}.nav svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.65;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .side-spacer{flex:1}.sidebar-foot{border-top:1px solid #ffffff17;padding:20px 11px 4px;display:flex;align-items:center;gap:11px;color:#b7c1b7;font-size:11px}.side-dot{height:9px;width:9px;border-radius:100%;background:#b4cfab;box-shadow:0 0 0 4px #b4cfab20}.side-foot-sub{color:#87958c;font-size:10px;margin-top:2px}
+    .content{min-width:0;padding:0 clamp(20px,3.2vw,56px) 55px;max-width:1750px;margin:0 auto;width:100%}.topbar{height:80px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e5e6df;gap:14px}.crumb{font-size:11px;color:#8c918b;letter-spacing:.04em}.crumb b{color:#526154;font-weight:600}.snapshot{display:inline-flex;align-items:center;gap:8px;color:#757d75;font-weight:600;font-size:10px;letter-spacing:.09em}.snapshot .dot{width:6px;height:6px;background:#93a78d;border-radius:50%}
+    .hero{display:flex;align-items:end;justify-content:space-between;gap:18px;padding:43px 0 28px}.eyebrow{font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#a18964;display:inline-flex;align-items:center;gap:9px}.eyebrow:before{content:'';display:block;width:20px;height:1px;background:#b59669}.hero h1{font:normal clamp(32px,3.1vw,49px)/1.16 var(--serif);letter-spacing:-.04em;margin:13px 0 12px}.hero h1 em{font-style:italic;color:#688c72}.intro{font-size:12px;color:#818981;line-height:1.8;margin:0;max-width:740px}.market-picker{display:flex;align-items:center;gap:11px;background:var(--paper);border:1px solid #e5e7df;border-radius:12px;padding:11px 14px;min-width:210px;box-shadow:var(--shadow)}.market-picker .mini{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#939a92;font-weight:750}.market-picker select{font-size:14px;font-weight:750;color:#33473a;border:0;background:transparent;padding:2px 24px 2px 0;width:100%;outline:none}
+    .stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin:14px 0 21px}.stat-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:21px 23px;min-height:119px;box-shadow:var(--shadow)}.stat-label{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#898f88;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:8px}.stat-label svg{width:16px;height:16px;stroke:#adb3aa;fill:none;stroke-width:1.5}.stat-value{font-size:clamp(26px,2.1vw,34px);line-height:1.2;letter-spacing:-.045em;font-weight:630;margin-top:13px;font-variant-numeric:tabular-nums}.stat-value.green{color:var(--leaf)}.stat-foot{color:#939992;font-size:10px;margin-top:5px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:17px}.section-head h2{font:normal 25px/1.2 var(--serif);letter-spacing:-.025em;margin:0}.section-head p{font-size:11px;margin:5px 0 0;color:#939993}.dash-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.9fr);gap:17px;margin-bottom:34px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:23px 25px;box-shadow:var(--shadow);min-width:0}.panel-title{font-size:12px;color:#3d493f;font-weight:750;display:flex;justify-content:space-between;align-items:center}.panel-note{color:#9ba19a;font-size:10px;margin:8px 0 0}.bars{padding:15px 0 0}.bar-line{display:grid;grid-template-columns:75px minmax(0,1fr) 80px;align-items:center;gap:15px;margin:16px 0}.bar-name{font-size:11px;color:#717a71;font-weight:650}.bar-track{height:7px;background:#edf0e9;border-radius:20px;overflow:hidden}.bar-fill{height:100%;background:#829f83;max-width:100%;border-radius:20px;transition:width .35s ease}.bar-line.active .bar-fill{background:#2e7855}.bar-line.active .bar-name,.bar-line.active .bar-amount{color:#226245;font-weight:850}.bar-amount{font-size:12px;text-align:right;font-variant-numeric:tabular-nums;font-weight:650;color:#56635a}.bar-button{display:contents}.bar-line{cursor:pointer}.bar-line:hover .bar-track{background:#e2eae0}
+    .callout{background:#f4f4ed;border:1px solid #e8e9dd;border-radius:12px;padding:14px 16px;margin-top:18px;font-size:11px;color:#697468;line-height:1.6}.callout strong{color:#384b3c}.miniblock{display:flex;gap:10px;padding:17px 0;border-bottom:1px solid #eceee7}.miniblock:last-child{border-bottom:0;padding-bottom:0}.round-icon{width:30px;height:30px;display:grid;place-items:center;background:#eff2eb;border-radius:8px;font-size:15px;flex:none;color:#59745d}.miniblock h4{font-size:11px;margin:0 0 6px;color:#3a4b3e}.miniblock p{font-size:11px;color:#8c958b;line-height:1.55;margin:0}.miniblock b{color:#626f63;font-weight:650}
+    .products-heading{padding-top:5px;scroll-margin-top:18px}.controls{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:18px 0 15px}.search-wrap{border:1px solid #e3e6de;border-radius:11px;background:var(--paper);display:flex;align-items:center;gap:10px;padding:0 15px;min-width:210px;width:34%;height:43px}.search-wrap svg{width:17px;height:17px;stroke:#969e96;stroke-width:1.65;fill:none}.search-wrap input{background:none;border:0;outline:none;font-size:12px;width:100%;color:#364339}.search-wrap input::placeholder{color:#a9b0a8}.right-controls{display:flex;align-items:center;gap:10px}.right-controls select{height:43px;background:var(--paper);border:1px solid #e3e6de;border-radius:11px;padding:0 30px 0 13px;color:#59675a;font-size:11px;font-weight:650;min-width:140px}.download-btn{height:43px;display:flex;align-items:center;gap:7px;background:#2d523e;border:1px solid #2d523e;color:white;border-radius:11px;padding:0 13px;font-size:11px;font-weight:700}.download-btn:hover{background:#214432}.download-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+    .table-card{background:var(--paper);border:1px solid #e3e5df;border-radius:17px;overflow:hidden;box-shadow:var(--shadow)}.table-scroller{width:100%;overflow-x:auto;scrollbar-color:#dcded6 transparent}.products-table{border-collapse:collapse;text-align:left;width:100%;min-width:930px;table-layout:fixed}.products-table th{font-size:9px;text-transform:uppercase;letter-spacing:.095em;color:#888f87;background:#f6f6f1;padding:19px 14px;border-bottom:1px solid #e8eae4;font-weight:800;white-space:nowrap}.products-table th:first-child,.products-table td:first-child{padding-left:23px}.products-table th:last-child,.products-table td:last-child{padding-right:23px}.products-table th:nth-child(1){width:94px}.products-table th:nth-child(2){width:28%}.products-table th:nth-child(3){width:12%}.products-table th:nth-child(4){width:12%}.products-table th:nth-child(5){width:9%}.products-table th:nth-child(6){width:12%}.products-table th:nth-child(7){width:12%}.products-table th:nth-child(8){width:13%;text-align:right}.products-table td{padding:12px 14px;border-bottom:1px solid #f0f0ec;vertical-align:middle;background:#fffefa;color:#5b645c;font-size:12px;font-variant-numeric:tabular-nums}.products-table .product-row{cursor:pointer}.product-row:hover td{background:#f9faf4}.product-row.open td{background:#f3f7f1;border-bottom-color:#e6ede4}.thumb{height:57px;width:57px;border-radius:10px;background:#f1f0e9;border:1px solid #ebeae2;display:block;object-fit:cover}.thumb-fallback{display:grid;place-items:center;font-size:22px;color:#98a09a}.prod-name{font-weight:750;font-size:12px;color:#343e35;line-height:1.48;display:flex;align-items:center;gap:6px}.chev{width:14px;height:14px;stroke:#a4aba2;fill:none;stroke-width:2;flex:none;transition:transform .18s}.open .chev{transform:rotate(180deg)}.prod-category{font-size:10px;color:#a1a8a0;margin-top:5px;letter-spacing:.01em}.num{font-weight:650;color:#4a564b;white-space:nowrap}.muted-num{color:#879188}.popup-tag{display:inline-flex;align-items:center;gap:5px;padding:6px 8px;border-radius:7px;background:#f7f1e7;color:#916f41;font-size:10px;font-weight:800;white-space:nowrap}.profit-cell{text-align:right}.profit-value{font-size:15px;font-weight:830;color:#2c7551;letter-spacing:-.025em}.profit-value.loss{color:#b45143}.no-quote{color:#abaeaa;font-size:11px;font-weight:600}.empty{padding:48px;text-align:center;color:#828b82;font-size:13px}.table-footer{background:#fafaf7;border-top:1px solid #f0f0e9;padding:14px 20px;color:#8d958e;font-size:10px;display:flex;justify-content:space-between;gap:10px}
+    .detail-row td{padding:0!important;background:#f8faf5!important;border-bottom:1px solid #dfe7db!important}.details{margin:13px 18px 19px;background:white;border:1px solid #e4e9df;border-radius:13px;padding:20px 22px}.detail-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}.detail-head h3{font:normal 21px/1.3 var(--serif);color:#333e34;margin:0}.detail-head p{font-size:10px;margin:5px 0 0;color:#98a096}.visit{font-size:10px;color:#46694f;text-decoration:none;font-weight:800;white-space:nowrap}.visit:hover{text-decoration:underline}.detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:18px}.detail-stat{background:#f8f9f5;border:1px solid #ecefe8;border-radius:10px;padding:13px}.detail-stat span{display:block;color:#97a095;font-size:10px;margin-bottom:7px}.detail-stat b{font-size:16px;color:#384b3e;font-variant-numeric:tabular-nums}.detail-stat.accent{background:#eaf5ec;border-color:#dfece0}.detail-stat.accent b{color:#2b7851}.market-detail-label{font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.1em;color:#89948a;margin-bottom:9px}.market-table-wrap{overflow-x:auto}.market-table{border-collapse:collapse;width:100%;min-width:690px}.market-table th{color:#8e9a8f;font-size:9px;text-align:right;background:#f8f9f6;padding:12px 12px;text-transform:uppercase;letter-spacing:.055em;font-weight:800;border-bottom:1px solid #e9eee8}.market-table td{padding:13px 12px;border-bottom:1px solid #edf0eb;background:white!important;text-align:right;font-size:11px;color:#59665b;font-weight:600}.market-table tr:last-child td{border-bottom:0}.market-table th:first-child,.market-table td:first-child{text-align:left}.market-table .selected-market td{background:#f1f8f1!important}.market-name{color:#35473a;font-weight:800}.tiny-flag{margin-right:7px}.pill-status{font-size:9px;color:#a1875c;background:#f8f2e7;padding:5px 7px;border-radius:6px}.market-table .strongprofit{color:#2c7551;font-size:13px;font-weight:850}.market-table .loss{color:#b45143}.market-table tr:hover td{background:#f5f9f3!important}.market-table .selected-market:hover td{background:#e9f5e9!important}.detail-foot{font-size:10px;color:#9ca69b;line-height:1.6;margin-top:13px}
+    .assumptions{margin-top:35px;scroll-margin-top:24px}.assumptions-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:17px}.assumptions h2{font:normal 25px var(--serif);margin:0 0 17px}.setting-wrap{display:flex;flex-direction:column;gap:18px}.setting{display:flex;align-items:center;justify-content:space-between;gap:10px}.setting-label{font-size:12px;font-weight:750;color:#3f4e42}.setting-info{color:#939d92;font-size:10px;line-height:1.55;margin-top:4px}.switch{height:27px;width:46px;border:0;background:#cfd7cc;border-radius:20px;position:relative;padding:0;transition:background .2s}.switch:before{content:'';width:21px;height:21px;background:white;position:absolute;top:3px;left:3px;border-radius:50%;box-shadow:0 2px 6px #0002;transition:transform .2s}.switch.on{background:#447858}.switch.on:before{transform:translateX(19px)}.fx-input{width:109px;border:1px solid #d9e3d7;background:#f6f8f3;border-radius:9px;padding:10px;color:#2d4d37;font-weight:800;text-align:right;font-variant-numeric:tabular-nums}.assumption-table{width:100%;border-collapse:collapse}.assumption-table td{padding:10px 0;border-bottom:1px solid #ecefe9;font-size:11px;color:#869186}.assumption-table td:last-child{text-align:right;font-weight:800;color:#435343}.assumption-table tr:last-child td{border:0}.fineprint{font-size:11px;line-height:1.85;color:#949b92;margin-top:13px}.fineprint strong{color:#596b5b}.endline{text-align:center;color:#a9aea7;font-size:10px;margin:39px 0 0;letter-spacing:.04em}
+    @media(max-width:1350px){.app{grid-template-columns:203px minmax(0,1fr)}.sidebar{padding:35px 15px 27px}.content{padding-left:27px;padding-right:27px}.stat-card{padding:18px}.products-table th,.products-table td{padding-left:10px;padding-right:10px}.products-table th:nth-child(2){width:24%}}
+    @media(max-width:1000px){.app{grid-template-columns:1fr}.sidebar{height:auto;min-height:0;position:relative;padding:13px 22px;display:flex;flex-direction:row;align-items:center;gap:15px}.brand{font-size:22px;margin:0}.brand-sub,.nav-kicker,.side-spacer,.sidebar-foot{display:none}.nav{flex-direction:row;gap:5px;margin-left:auto}.nav a{font-size:0;padding:10px}.nav svg{height:18px;width:18px}.nav a.current:before{display:none}.content{padding:0 22px 50px}.topbar{height:58px}.hero{padding:32px 0 24px}.stat-grid{gap:10px}.stat-card{min-height:100px;padding:16px 14px}.stat-value{font-size:27px}.stat-label{font-size:9px}.panel{padding:18px}}
+    @media(max-width:720px){.topbar .snapshot{display:none}.hero{display:block}.hero h1{font-size:35px}.market-picker{margin-top:20px;max-width:100%}.stat-grid{grid-template-columns:1fr 1fr}.dash-grid,.assumptions-grid{grid-template-columns:1fr}.controls{display:grid;gap:9px}.search-wrap{width:100%}.right-controls{display:flex;flex-wrap:wrap;gap:8px}.right-controls select{flex:1;min-width:130px}.download-btn{flex-shrink:0}.section-head h2{font-size:23px}.bar-line{grid-template-columns:65px 1fr 70px;gap:10px}.detail-grid{grid-template-columns:1fr 1fr}.detail-head{align-items:start}.detail-head h3{font-size:18px}.stat-label{letter-spacing:0}.content{padding-left:15px;padding-right:15px}.products-table{min-width:860px}.snapshot{font-size:9px}.table-footer{font-size:9px}}
+
+    /* v2: cleaner pricing controls and legible country-level product cards */
+    .hero-actions{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;justify-content:flex-end}
+    .discount-picker{display:flex;align-items:center;gap:12px;background:#fffefa;border:1px solid #dedfd5;border-radius:12px;padding:10px 13px;min-width:190px;box-shadow:var(--shadow)}
+    .discount-symbol{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#f0e7d7;color:#81603c;font-weight:900;font-size:18px}
+    .discount-label{display:flex;flex-direction:column;gap:3px;min-width:76px}
+    .discount-label .mini{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#8c9288;font-weight:800}
+    .discount-sub{font-size:10px;color:#627166;white-space:nowrap}
+    .discount-entry{display:flex;align-items:center;gap:3px;white-space:nowrap}
+    .discount-number{width:47px;border:0;border-bottom:2px solid #c5ae87;background:transparent;text-align:right;color:#294c38;font-size:20px;font-weight:850;padding:3px 2px;outline:0;font-variant-numeric:tabular-nums}
+    .discount-entry span{font-size:13px;font-weight:750;color:#516352}
+    .rate-control{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#2a6444}
+    .rate-input{width:75px}
+    .details{padding:clamp(18px,2.5vw,34px);margin:15px 18px 22px;border:1px solid #dde5da;border-radius:18px;box-shadow:0 10px 28px #2336280d;background:#fffefa}
+    .detail-head{margin-bottom:22px;align-items:flex-start;gap:16px}
+    .detail-eyebrow{display:block;color:#9d8154;font-size:10px;letter-spacing:.14em;font-weight:850;margin-bottom:8px}
+    .detail-head h3{font:normal clamp(22px,2vw,30px)/1.2 var(--serif);margin:0 0 7px;color:#29352b}
+    .detail-head p{font-size:12px;color:#737f73;line-height:1.55}
+    .visit{display:inline-flex;align-items:center;justify-content:center;border:1px solid #dce6d9;background:#f8faf5;border-radius:9px;padding:11px 13px;color:#2f6044;font-size:11px}
+    .detail-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;background:#f3f5ef;padding:14px;border-radius:13px;margin-bottom:27px}
+    .detail-summary-info{padding:7px 13px;border-right:1px solid #e0e7dd;min-width:0}
+    .detail-summary-info:last-child{border-right:0}
+    .detail-summary-info span{display:block;font-size:11px;color:#748276;font-weight:600;margin-bottom:7px}
+    .detail-summary-info strong{font-size:20px;color:#334b38;white-space:nowrap;font-variant-numeric:tabular-nums}
+    .country-heading{margin:0 0 17px;display:flex;align-items:end;justify-content:space-between;gap:15px}
+    .country-heading h4{margin:0;font:normal 22px var(--serif);color:#29362b}
+    .country-heading p{font-size:11px;color:#859083;margin:0;line-height:1.5;text-align:right;max-width:300px}
+    .country-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;align-items:stretch}
+    .country-card{background:white;border:1px solid #e1e7df;border-radius:15px;overflow:hidden;box-shadow:0 3px 12px #25372b07;min-width:0}
+    .country-card.country-selected{border:2px solid #619176;background:#fcfefa}
+    .country-card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:17px 19px;border-bottom:1px solid #edf0ea}
+    .country-title{display:flex;align-items:center;gap:10px;min-width:0}
+    .country-flag{font-size:23px;flex:none;line-height:1}
+    .country-title div{display:flex;flex-direction:column;gap:5px;min-width:0}
+    .country-title strong{font-size:15px;color:#314437}
+    .country-title div span{font-size:11px;color:#9ba49a}
+    .current-market-label{font-size:10px;color:#387050;font-weight:800;background:#e5f2e6;padding:6px 9px;border-radius:6px;white-space:nowrap}
+    .country-profit{display:flex;flex-direction:column;gap:6px;padding:19px 19px 17px;background:linear-gradient(180deg,#f9fbf6,#fff);border-bottom:1px solid #e8ede7}
+    .country-profit>span{font-size:10px;letter-spacing:.12em;font-weight:850;color:#8f988b}
+    .country-profit strong{font-size:35px;color:#28734e;font-weight:780;letter-spacing:-.055em;font-variant-numeric:tabular-nums}
+    .country-profit small{font-size:11px;color:#7d8b7c}
+    .country-profit .profit-negative,.country-card-total .profit-negative,.mobile-item-profit .profit-negative{color:#ae5549}
+    .country-breakdown{padding:7px 19px 11px}
+    .country-breakdown>div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 0;font-size:12px;color:#738075}
+    .country-breakdown b{font-size:13px;color:#36483a;font-weight:750;white-space:nowrap;font-variant-numeric:tabular-nums}
+    .country-breakdown b.country-deduct{color:#7c7169}
+    .country-breakdown .subtotal-line{border-top:1px solid #e5eae3;border-bottom:1px solid #e5eae3;margin:3px 0 7px;font-weight:800;color:#526654}
+    .country-card-total{display:flex;justify-content:space-between;align-items:center;gap:9px;background:#edf5ee;border-top:1px solid #dceadd;padding:16px 19px}
+    .country-card-total span{color:#4d6a55;font-size:12px;font-weight:800}
+    .country-card-total strong{font-size:21px;color:#286e4c;font-variant-numeric:tabular-nums}
+    .detail-foot{font-size:11px;color:#8b9389;line-height:1.75;margin:20px 1px 0}
+    .products-table th{font-size:10px}
+    .products-table td{font-size:12px}
+    .mobile-product-list{display:none}
+    @media(max-width:1250px){.hero{align-items:start;flex-direction:column}.hero-actions{justify-content:flex-start}.detail-head{flex-direction:column}.country-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:720px){
+      .hero-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:9px}.market-picker,.discount-picker{min-width:0;width:100%;margin:0;padding:10px}.market-picker select{font-size:12px;padding-right:6px}.discount-picker{gap:7px}.discount-symbol{display:none}.discount-label{min-width:0}.discount-sub{font-size:9px}.discount-number{width:34px;font-size:17px}
+      .table-scroller{display:none}.mobile-product-list{display:block;background:#fafbf7;padding:10px}
+      .mobile-item{background:white;border:1px solid #e4eae2;border-radius:13px;margin-bottom:9px;overflow:hidden}
+      .mobile-item-btn{display:flex;align-items:center;gap:12px;padding:12px;width:100%;background:white;border:0;text-align:left;color:inherit}
+      .mobile-item-btn[aria-expanded="true"]{background:#f5f9f4}
+      .mobile-thumb .thumb{width:56px;height:60px}
+      .mobile-item-main{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+      .mobile-item-main strong{font-size:12px;line-height:1.3;color:#34493a}
+      .mobile-item-main small{font-size:10px;color:#879488}
+      .mobile-small-line{display:flex;flex-wrap:wrap;gap:5px 11px;font-size:10px;color:#717e74}
+      .mobile-item-profit{display:flex;flex-direction:column;align-items:flex-end;gap:5px;min-width:82px}
+      .mobile-item-profit b{font-size:15px;color:#24734c;white-space:nowrap}
+      .mobile-item-profit small{font-size:9px;color:#92a092;text-align:right}
+      .mobile-chevron{font-size:21px;color:#648b70;line-height:1}
+      .mobile-item .details{margin:0;border:0;border-top:1px solid #dce8dd;border-radius:0;box-shadow:none;padding:15px 13px}
+      .detail-head h3{font-size:21px}.detail-head p{font-size:11px}
+      .detail-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:0;padding:7px}
+      .detail-summary-info{border:0;padding:11px}.detail-summary-info strong{font-size:18px}
+      .country-grid{grid-template-columns:1fr;gap:12px}.country-heading{display:block}.country-heading p{text-align:left;margin-top:6px}
+      .country-profit strong{font-size:31px}.country-breakdown>div{font-size:12px}
+      .detail-foot{font-size:10px}
+    }
+    @media(max-width:370px){.hero-actions{grid-template-columns:1fr}.discount-picker{max-width:200px}}
+
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" aria-label="Dashboard navigation">
+    <div><div class="brand">ZAISEN</div><div class="brand-sub">Product intelligence</div></div>
+    <div class="nav-kicker">Workspace</div>
+    <nav class="nav">
+      <a href="#overview" class="current" aria-label="Overview"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></svg>Overview</a>
+      <a href="#products" aria-label="Products"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>All products</a>
+      <a href="#markets" aria-label="Market comparison"><svg viewBox="0 0 24 24"><path d="M3 19V5M9 19v-8M15 19V8M21 19V3"/></svg>Market comparison</a>
+      <a href="#assumptions" aria-label="Cost assumptions"><svg viewBox="0 0 24 24"><path d="M12 4v16M5 8h14M7 16h10"/></svg>Cost assumptions</a>
+    </nav>
+    <div class="side-spacer"></div>
+    <div class="sidebar-foot"><span class="side-dot"></span><div>Shopify catalog snapshot<div class="side-foot-sub">06 November 2026 · 39 products</div></div></div>
+  </aside>
+  <main class="content" id="overview">
+    <header class="topbar"><div class="crumb">ZAISEN <span style="padding:0 8px;color:#b8bcb5">/</span> <b>Profit intelligence</b></div><div class="snapshot"><span class="dot"></span>SHOPIFY SNAPSHOT <span style="color:#c0c6bd">·</span> 06 NOV 2026</div></header>
+    <section class="hero" aria-label="Dashboard overview"><div><div class="eyebrow">Commerce intelligence dashboard</div><h1>Know what every <em>piece earns.</em></h1><p class="intro">Real ZAISEN products, straightforward costs, and country-by-country profit estimates. Click any product to see exactly where the money goes.</p></div><div class="hero-actions"><label class="market-picker" for="marketSelect"><span style="font-size:22px" id="marketFlag" aria-hidden="true">🇬🇧</span><span style="flex:1"><span class="mini">Shipping market</span><select id="marketSelect" aria-label="Selected shipping market"><option value="UK">United Kingdom</option><option value="USA">United States</option><option value="Canada">Canada</option><option value="Germany">Germany</option><option value="France">France</option></select></span></label><label class="discount-picker" for="discountInput"><span class="discount-symbol">%</span><span class="discount-label"><span class="mini">Discounts</span><span class="discount-sub">Scenario only · not Shopify</span></span><span class="discount-entry"><input id="discountInput" class="discount-number" type="number" min="0" max="100" step="0.5" value="10" inputmode="decimal" aria-label="Discount percentage"><span>%</span></span></label></div></section>
+    <section class="stat-grid" id="stats" aria-label="Summary statistics">
+      <div class="stat-card"><div class="stat-label">Active products <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 9h8M8 13h8M8 17h4"/></svg></div><div class="stat-value" id="statCount">39</div><div class="stat-foot">From ZAISEN Shopify</div></div>
+      <div class="stat-card"><div class="stat-label">Avg. profit / item <svg viewBox="0 0 24 24"><path d="M4 17l6-6 4 3 6-7M16 7h4v4"/></svg></div><div class="stat-value green" id="statAvg">—</div><div class="stat-foot">After discounts · selected market</div></div>
+      <div class="stat-card"><div class="stat-label">Highest unit profit <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 5 2 8-6-4-6 4 2-8-6-5h7z"/></svg></div><div class="stat-value" id="statTop">—</div><div class="stat-foot" id="statTopName">Best earning product</div></div>
+      <div class="stat-card"><div class="stat-label">Products with a loss <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg></div><div class="stat-value" id="statLoss">0</div><div class="stat-foot">On one-item orders</div></div>
+    </section>
+    <section id="markets" class="dash-grid" aria-label="Market comparison">
+      <article class="panel"><div class="panel-title">Average profit by destination <span style="font-size:10px;font-weight:600;color:#a1a99f">USD / product</span></div><p class="panel-note">Single-item orders · current editable discount</p><div class="bars" id="marketBars"></div><div class="callout"><strong>How to use:</strong> Choose a country above or click its bar to recalculate all 39 products. Click any product row to compare all five destinations.</div></article>
+      <article class="panel"><div class="panel-title">Your cost model <span style="color:#9caa9b;font-size:10px">SIMPLE & TRANSPARENT</span></div><div class="miniblock"><div class="round-icon">◈</div><div><h4>Standard products above $60</h4><p><b>$15</b> base cost · <b>2 kg</b>, unless overridden.</p></div></div><div class="miniblock"><div class="round-icon">◇</div><div><h4>Standard products at or below $60</h4><p><b>$8</b> base cost · <b>1 kg</b>, unless overridden.</p></div></div><div class="miniblock"><div class="round-icon">%</div><div><h4>Editable first-order discount</h4><p><b id="modelDiscount">10%</b> currently applied before the free-shipping threshold.</p></div></div><div class="miniblock"><div class="round-icon">↗</div><div><h4>Shipping in USD</h4><p>Quoted QLC Pakistan courier rates ÷ <b id="modelFx">276.74</b> PKR/USD</p></div></div></article>
+    </section>
+    <section id="products" class="products-heading"><div class="section-head"><div><h2>Product profitability</h2><p>One row per product. Select a row for a clear breakdown of all five markets.</p></div><div id="visibleCount" style="font-size:11px;font-weight:750;color:#829082;white-space:nowrap">39 products</div></div>
+      <div class="controls"><label class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="searchInput" placeholder="Search products..." aria-label="Search products"></label><div class="right-controls"><select id="categorySelect" aria-label="Filter category"><option value="All">All collections</option><option value="Clocks & Wall Art">Clocks & Wall Art</option><option value="Drinkware">Drinkware</option><option value="Home & Storage">Home & Storage</option><option value="Kitchen & Serving">Kitchen & Serving</option><option value="Lighting">Lighting</option><option value="Sculptures & Models">Sculptures & Models</option></select><select id="sortSelect" aria-label="Sort products"><option value="default">Catalog order</option><option value="profit-high">Profit: highest first</option><option value="profit-low">Profit: lowest first</option><option value="price-high">Price: highest first</option><option value="price-low">Price: lowest first</option><option value="name">Product: A–Z</option></select><button class="download-btn" id="csvButton" type="button" title="Export current market data to CSV"><svg viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></svg>Export CSV</button></div></div>
+      <div class="table-card"><div class="table-scroller"><table class="products-table"><thead><tr><th>Photo</th><th>Product</th><th>Our cost</th><th>Courier</th><th>Weight</th><th>Live price</th><th>Discounts</th><th>Profit</th></tr></thead><tbody id="productRows"></tbody></table></div><div id="mobileProductRows" class="mobile-product-list"></div><div class="table-footer"><span id="footMarket">UK shipping · USD</span><span>Click a product for country details ↓</span></div></div>
+    </section>
+    <section class="assumptions" id="assumptions"><h2>Rates & assumptions</h2><div class="assumptions-grid"><article class="panel"><div class="panel-title" style="margin-bottom:20px">Adjust your scenario</div><div class="setting-wrap"><div class="setting"><div><div class="setting-label">Discount percentage</div><div class="setting-info">Starts at 10%. All numbers update instantly. This does not change Shopify discounts.</div></div><div class="rate-control"><input class="fx-input rate-input" type="number" id="discountSettingsInput" min="0" max="100" step="0.5" value="10" inputmode="decimal" aria-label="Editable discount percentage"><span>%</span></div></div><div class="setting"><div><div class="setting-label">Exchange rate (PKR per $1)</div><div class="setting-info">Changes courier costs and profits across all countries.</div></div><input class="fx-input" type="number" id="fxInput" min="1" max="1000" step="0.01" value="276.74" aria-label="PKR per USD exchange rate"></div></div></article><article class="panel"><div class="panel-title" style="margin-bottom:15px">Customer shipping policy used</div><table class="assumption-table"><tbody><tr><td>UK</td><td>$6.99 / free at $60</td></tr><tr><td>USA, Canada, DE, FR</td><td>$9.99 / free at $60</td></tr></tbody></table><div class="fineprint">Customer-paid shipping uses the <strong>discounted product price</strong> to determine free-shipping eligibility. These are previously agreed policy assumptions, not a live checkout audit. Item-specific cost and weight overrides are included.</div></article></div><div class="fineprint" style="max-width:1000px;margin-top:18px">Profit = discounted item price + shipping paid by buyer − product cost − QLC courier cost. Product-specific costs and weights override the default $15/2 kg or $8/1 kg rule. This is estimated <strong>unit contribution, not net business profit</strong>; it excludes processing fees, packaging, affiliate commissions, advertising, returns, duties, taxes, and other overhead. Based on 39 active Shopify products and product photos retrieved 06 Nov 2026. Product prices are a fixed snapshot, not continuously synced. Exact courier weights and fees may differ from these model assumptions.</div></section>
+    <div class="endline">ZAISEN &nbsp; ◆ &nbsp; CRAFTED TO LAST. CALCULATED TO GROW.</div>
+  </main>
+</div>
+<script>
+'use strict';
+const products=[{"id":1,"name":"Wooden Pitcher + 6 Cups","price":99.99,"handle":"handcrafted-wooden-pitcher-cups-set","category":"Drinkware","url":"https://zaisenstore.com/products/handcrafted-wooden-pitcher-cups-set","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-23_at_5.57.04_PM_1.jpg?v=1790670348"},{"id":2,"name":"Ship Wheel Wall Clock","price":89.99,"handle":"wooden-ship-wheel-wall-clock","category":"Clocks & Wall Art","url":"https://zaisenstore.com/products/wooden-ship-wheel-wall-clock","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/ChatGPT_Image_Sep_23_2026_08_31_44_PM.png?v=1790179764"},{"id":3,"name":"Carved Tissue Box Cover","price":64.99,"handle":"hand-carved-wooden-tissue-box-cover","category":"Home & Storage","url":"https://zaisenstore.com/products/hand-carved-wooden-tissue-box-cover","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-24_at_5.51.24_PM_1.jpg?v=1790255383"},{"id":4,"name":"Foldable Serving Tray","price":119.99,"handle":"hand-carved-wooden-foldable-serving-tray","category":"Kitchen & Serving","url":"https://zaisenstore.com/products/hand-carved-wooden-foldable-serving-tray","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-25_at_6.01.23_PM_1.jpg?v=1790677015"},{"id":5,"name":"12-Piece Wooden Cutlery","price":47.99,"handle":"handcrafted-wooden-cutlery-set","category":"Kitchen & Serving","url":"https://zaisenstore.com/products/handcrafted-wooden-cutlery-set","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-23_at_9.22.17_PM.jpg?v=1790680783"},{"id":6,"name":"Serving Trays with Handles","price":129.99,"handle":"wooden-serving-tray-set-of-3","category":"Kitchen & Serving","url":"https://zaisenstore.com/products/wooden-serving-tray-set-of-3","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-24_at_7.50.18_PM_1.jpg?v=1790682155"},{"id":7,"name":"Ship Wheel Desk Clock","price":79.99,"handle":"wooden-ship-wheel-desk-clock","category":"Clocks & Wall Art","url":"https://zaisenstore.com/products/wooden-ship-wheel-desk-clock","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-24_at_8.37.24_PM.jpg?v=1790688723"},{"id":8,"name":"Nesting Bowls · Set of 3","price":54.99,"handle":"handcrafted-wooden-nesting-bowl-set","category":"Kitchen & Serving","url":"https://zaisenstore.com/products/handcrafted-wooden-nesting-bowl-set","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-25_at_8.56.39_PM.jpg?v=1790691081"},{"id":9,"name":"Wooden Jug + 4 Cups","price":99.99,"handle":"handcrafted-wooden-jug-4-cups-set","category":"Drinkware","url":"https://zaisenstore.com/products/handcrafted-wooden-jug-4-cups-set","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-25_at_8.43.38_PM.jpg?v=1790693436"},{"id":10,"name":"Wooden Jug + 5 Cups","price":99.99,"handle":"handcrafted-wooden-jug-5-cups-set","category":"Drinkware","url":"https://zaisenstore.com/products/handcrafted-wooden-jug-5-cups-set","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-25_at_8.19.23_PM_1.jpg?v=1790694929"},{"id":11,"name":"Carved Tea Set · 6 Cups","price":99.99,"handle":"hand-carved-wooden-tea-set-6-cups-tray","category":"Drinkware","url":"https://zaisenstore.com/products/hand-carved-wooden-tea-set-6-cups-tray","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-25_at_7.06.11_PM_1.jpg?v=1790696993"},{"id":12,"name":"Wooden Ship Decor","price":64.99,"handle":"handcrafted-wooden-ship-decor","category":"Sculptures & Models","url":"https://zaisenstore.com/products/handcrafted-wooden-ship-decor","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-25_at_6.41.19_PM_1.jpg?v=1790706868"},{"id":13,"name":"Sailboat Desk Model","price":54.99,"handle":"handcrafted-wooden-sailboat-desk-decor","category":"Sculptures & Models","url":"https://zaisenstore.com/products/handcrafted-wooden-sailboat-desk-decor","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-25_at_6.45.34_PM.jpg?v=1790755330"},{"id":14,"name":"Carved Tray Set · 3 Pieces","price":129.99,"handle":"handcrafted-carved-wooden-serving-tray-set-of-3","category":"Kitchen & Serving","url":"https://zaisenstore.com/products/handcrafted-carved-wooden-serving-tray-set-of-3","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-25_at_9.20.32_PM_1.jpg?v=1790759171"},{"id":15,"name":"Carved Wooden Table Lamp","price":109.99,"handle":"handcrafted-carved-wooden-table-lamp","category":"Lighting","url":"https://zaisenstore.com/products/handcrafted-carved-wooden-table-lamp","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8682579317_g3p1.jpg?v=1793373118"},{"id":16,"name":"Tea / Coffee / Sugar Jars","price":69.99,"handle":"tea-coffee-sugar-canisters-wooden-set","category":"Home & Storage","url":"https://zaisenstore.com/products/tea-coffee-sugar-canisters-wooden-set","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-29_at_2.01.20_PM.jpg?v=1790764120"},{"id":17,"name":"Wooden Duck Lamp","price":64.99,"handle":"wooden-duck-lamp-animal-table-light","category":"Lighting","url":"https://zaisenstore.com/products/wooden-duck-lamp-animal-table-light","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-30_at_3.57.44_PM_1.jpg?v=1790773619"},{"id":18,"name":"Wooden Dolphin Lamp","price":64.99,"handle":"wooden-dolphin-lamp-coastal-table-light","category":"Lighting","url":"https://zaisenstore.com/products/wooden-dolphin-lamp-coastal-table-light","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/zaisen-wooden-dolphin-lamp-lifestyle-1.png?v=1790776810"},{"id":19,"name":"Wooden Horse Lamp","price":64.99,"handle":"wooden-horse-lamp-equestrian-table-light","category":"Lighting","url":"https://zaisenstore.com/products/wooden-horse-lamp-equestrian-table-light","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-30_at_7.08.38_PM.jpg?v=1790778180"},{"id":20,"name":"Rearing Horse Statue","price":81.99,"handle":"handcrafted-wooden-horse-statue","category":"Sculptures & Models","url":"https://zaisenstore.com/products/handcrafted-wooden-horse-statue","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/WhatsApp_Image_2026-09-29_at_5.33.09_PM.jpg?v=1790935879"},{"id":21,"name":"Dry Fruit Box · Glass Lid","price":79.99,"handle":"wooden-dry-fruit-box-glass-lid","category":"Kitchen & Serving","url":"https://zaisenstore.com/products/wooden-dry-fruit-box-glass-lid","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8676012495_2gzn.jpg?v=1793368792"},{"id":22,"name":"Wooden Eagle Statue","price":69.99,"handle":"handcrafted-wooden-eagle-statue","category":"Sculptures & Models","url":"https://zaisenstore.com/products/handcrafted-wooden-eagle-statue","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8676149871_i2hk.jpg?v=1793369549"},{"id":23,"name":"Horse Statue with Saddle","price":69.99,"handle":"wooden-rearing-horse-statue-saddle","category":"Sculptures & Models","url":"https://zaisenstore.com/products/wooden-rearing-horse-statue-saddle","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8628593686_e1ba.jpg?v=1793370280"},{"id":24,"name":"Tea Bag Organizer","price":69.99,"handle":"wooden-tea-bag-organizer-coffee-caddy","category":"Home & Storage","url":"https://zaisenstore.com/products/wooden-tea-bag-organizer-coffee-caddy","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8682044025_r0tm.jpg?v=1793370702"},{"id":25,"name":"Crane Sculpture · 2 Birds","price":119.99,"handle":"wooden-crane-sculpture-set","category":"Sculptures & Models","url":"https://zaisenstore.com/products/wooden-crane-sculpture-set","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8682226435_6drk.jpg?v=1793372829"},{"id":26,"name":"Two-Tone Bowls · Set of 7","price":69.99,"handle":"wooden-bowl-set-of-7","category":"Kitchen & Serving","url":"https://zaisenstore.com/products/wooden-bowl-set-of-7","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8683288363_7698.jpg?v=1793373649"},{"id":27,"name":"Sunburst Wall Clock","price":89.99,"handle":"wooden-sunburst-wall-clock","category":"Clocks & Wall Art","url":"https://zaisenstore.com/products/wooden-sunburst-wall-clock","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8746306779_focw.jpg?v=1793374421"},{"id":28,"name":"Mandala Wall Clock","price":89.99,"handle":"wooden-mandala-wall-clock","category":"Clocks & Wall Art","url":"https://zaisenstore.com/products/wooden-mandala-wall-clock","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8748510449_1ihi.jpg?v=1793375009"},{"id":29,"name":"Arabic Calligraphy Wall Art","price":99.99,"handle":"wooden-islamic-wall-art-arabic-calligraphy","category":"Clocks & Wall Art","url":"https://zaisenstore.com/products/wooden-islamic-wall-art-arabic-calligraphy","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8787430325_tcg0.jpg?v=1793375553"},{"id":30,"name":"Dark Bowls · Set of 7","price":69.99,"handle":"dark-wooden-bowl-set-of-7","category":"Kitchen & Serving","url":"https://zaisenstore.com/products/dark-wooden-bowl-set-of-7","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8698385292_qffo.jpg?v=1793373915"},{"id":31,"name":"Round Islamic Wall Art","price":89.99,"handle":"round-wooden-islamic-wall-art","category":"Clocks & Wall Art","url":"https://zaisenstore.com/products/round-wooden-islamic-wall-art","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8792388729_e1z6.jpg?v=1793376141"},{"id":32,"name":"Ornate Carved Wall Clock","price":89.99,"handle":"ornate-carved-wooden-wall-clock","category":"Clocks & Wall Art","url":"https://zaisenstore.com/products/ornate-carved-wooden-wall-clock","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8744674302_8g3t.jpg?v=1793546969"},{"id":33,"name":"Wooden Helicopter Model","price":49.99,"handle":"wooden-helicopter-model","category":"Sculptures & Models","url":"https://zaisenstore.com/products/wooden-helicopter-model","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8792640113_5oqf.jpg?v=1793377251"},{"id":34,"name":"Wooden Excavator Model","price":49.99,"handle":"wooden-excavator-model","category":"Sculptures & Models","url":"https://zaisenstore.com/products/wooden-excavator-model","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8792867887_ryzq.jpg?v=1793377332"},{"id":35,"name":"Wooden Fighter Jet Model","price":49.99,"handle":"wooden-fighter-jet-model","category":"Sculptures & Models","url":"https://zaisenstore.com/products/wooden-fighter-jet-model","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8792917615_envy.jpg?v=1793377425"},{"id":36,"name":"Wooden Vintage Car Model","price":49.99,"handle":"wooden-vintage-car-model","category":"Sculptures & Models","url":"https://zaisenstore.com/products/wooden-vintage-car-model","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8745126864_j9nf.jpg?v=1793377567"},{"id":37,"name":"Wooden Donkey Figurine","price":49.99,"handle":"wooden-donkey-figurine","category":"Sculptures & Models","url":"https://zaisenstore.com/products/wooden-donkey-figurine","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8745168224_4zq7.jpg?v=1793377657"},{"id":38,"name":"Wooden Horse Carriage","price":49.99,"handle":"wooden-horse-carriage-model","category":"Sculptures & Models","url":"https://zaisenstore.com/products/wooden-horse-carriage-model","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8793056043_iwm3.jpg?v=1793377743"},{"id":39,"name":"Spindle Wall Clock · 18 in","price":89.99,"handle":"wooden-spindle-wall-clock-two-styles","category":"Clocks & Wall Art","url":"https://zaisenstore.com/products/wooden-spindle-wall-clock-two-styles","img":"https://cdn.shopify.com/s/files/1/1019/0884/0741/files/il_fullxfull.8571843156_ksx8.jpg?v=1793378962"}];
+// User-confirmed SKU overrides, on top of the ordinary price-based cost/weight rule.
+// Both 3-piece serving tray sets weigh 4 kg; the foldable tray weighs 3 kg.
+const productOverrides={
+  2:{cost:10},3:{cost:10},
+  4:{cost:18,weight:3},6:{cost:18,weight:4},7:{cost:10},8:{cost:10},
+  14:{cost:18,weight:4},16:{cost:10},
+  17:{cost:10,weight:1},18:{cost:10,weight:1},19:{cost:10,weight:1},
+  20:{cost:10,weight:1},21:{cost:10},22:{cost:10,weight:1},
+  23:{cost:10,weight:1},24:{cost:10},
+  26:{cost:10},27:{cost:10},28:{cost:10},30:{cost:10},
+  32:{cost:10},39:{cost:10}
+};
+const markets=[
+  {id:'UK',name:'United Kingdom',flag:'🇬🇧',first:4500,extra:1500,buyer:6.99,threshold:60},
+  {id:'USA',name:'United States',flag:'🇺🇸',first:8000,extra:2600,buyer:9.99,threshold:60},
+  {id:'Canada',name:'Canada',flag:'🇨🇦',first:8000,extra:2600,buyer:9.99,threshold:60},
+  {id:'Germany',name:'Germany',flag:'🇩🇪',first:7000,extra:2400,buyer:9.99,threshold:60},
+  {id:'France',name:'France',flag:'🇫🇷',first:7000,extra:2400,buyer:9.99,threshold:60}
+];
+const $=id=>document.getElementById(id);
+const state={market:'UK',discount:10,fx:276.74,search:'',category:'All',sort:'default',expanded:new Set()};
+const money=n=>n==null?'—':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
+const round=n=>Math.round((n+Number.EPSILON)*100)/100;
+const pct=n=>n==null?'—':(n*100).toFixed(1)+'%';
+const htmlEscape=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+function numbers(p,m){
+ const override=productOverrides[p.id]||{};
+ const weight=override.weight??(p.price>60?2:1);
+ const cost=override.cost??(p.price>60?15:8);
+ const discount=round(p.price*state.discount/100);
+ const net=round(p.price-discount);
+ const buyerShip=net<m.threshold?m.buyer:0;
+ const courier=m.first==null?null:round((m.first+(weight-1)*m.extra)/state.fx);
+ const collected=round(net+buyerShip);
+ const profit=courier==null?null:round(collected-cost-courier);
+ const margin=profit==null?null:profit/collected;
+ return {weight,cost,discount,net,buyerShip,collected,courier,profit,margin};
+}
+const market=()=>markets.find(m=>m.id===state.market);
+function renderStats(){
+ const m=market();let rows=products.map(p=>({p,calc:numbers(p,m)}));
+ let valid=rows.filter(x=>x.calc.profit!==null);
+ $('statCount').textContent=products.length;
+ $('statAvg').textContent=valid.length?money(round(valid.reduce((a,b)=>a+b.calc.profit,0)/valid.length)):'—';
+ $('statTop').textContent=valid.length?money(Math.max(...valid.map(r=>r.calc.profit))):'—';
+ const winner=valid.length?valid.reduce((a,b)=>a.calc.profit>b.calc.profit?a:b):null;
+ $('statTopName').textContent=winner?winner.p.name:'Courier quote required';
+ $('statLoss').textContent=valid.length?valid.filter(r=>r.calc.profit<0).length:'—';
+ $('statLoss').style.color=valid.some(r=>r.calc.profit<0)?'#b45143':'';
+ $('marketFlag').textContent=m.flag;
+ $('footMarket').textContent=m.name+' shipping · all amounts USD · estimates';
+ $('modelFx').textContent=state.fx.toFixed(2);
+ $('modelDiscount').textContent=state.discount+'%';
+}
+function renderBars(){
+ let data=markets.filter(m=>m.first!=null).map(m=>({m,avg:round(products.reduce((sum,p)=>sum+numbers(p,m).profit,0)/products.length)}));
+ let max=Math.max(...data.map(x=>x.avg),1);
+ $('marketBars').innerHTML=data.map(x=>`<div class="bar-line ${x.m.id===state.market?'active':''}" role="button" tabindex="0" data-market="${x.m.id}" aria-label="View ${htmlEscape(x.m.name)} profitability"><div class="bar-name">${x.m.flag} ${x.m.id}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.max(2,100*x.avg/max).toFixed(2)}%"></div></div><div class="bar-amount">${money(x.avg)}</div></div>`).join('');
+}
+function thumb(p){return `<img loading="lazy" decoding="async" class="thumb" src="${htmlEscape(p.img)}" alt="${htmlEscape(p.name)}" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span hidden class="thumb thumb-fallback" aria-label="Product image unavailable">◇</span>`}
+function expandedHtml(p){
+ const selected=numbers(p,market());
+ const info=markets.map(m=>({m,c:numbers(p,m)}));
+ return `<section class="details" role="region" aria-label="${htmlEscape(p.name)} profit by country">
+   <div class="detail-head">
+     <div class="detail-intro"><span class="detail-eyebrow">PROFIT BREAKDOWN · 5 MARKETS</span><h3>${htmlEscape(p.name)}</h3><p>Actual product price · Your updated costs and weight · Editable ${state.discount}% discount</p></div>
+     <a class="visit" href="${htmlEscape(p.url)}" target="_blank" rel="noopener noreferrer">View Shopify listing ↗</a>
+   </div>
+   <div class="detail-summary">
+     <div class="detail-summary-info"><span>Product cost</span><strong>${money(selected.cost)}</strong></div>
+     <div class="detail-summary-info"><span>Parcel weight</span><strong>${selected.weight} kg</strong></div>
+     <div class="detail-summary-info"><span>Live selling price</span><strong>${money(p.price)}</strong></div>
+     <div class="detail-summary-info"><span>Discount (${state.discount}%)</span><strong>−${money(selected.discount)}</strong></div>
+   </div>
+   <div class="country-heading"><h4>Compare profits by destination</h4><p>Each card shows one sale, in USD. The selected market has a highlighted border.</p></div>
+   <div class="country-grid">
+     ${info.map(({m,c})=>`<article class="country-card ${m.id===state.market?'country-selected':''}">
+       <div class="country-card-head"><div class="country-title"><span class="country-flag">${m.flag}</span><div><strong>${htmlEscape(m.name)}</strong><span>${c.weight} kg shipment</span></div></div>${m.id===state.market?'<span class="current-market-label">Selected</span>':''}</div>
+       <div class="country-profit"><span>PROFIT PER ORDER</span><strong class="${c.profit<0?'profit-negative':''}">${money(c.profit)}</strong><small>${pct(c.margin)} margin on collected revenue</small></div>
+       <div class="country-breakdown" aria-label="Calculation details">
+         <div><span>Selling price</span><b>${money(p.price)}</b></div>
+         <div><span>Discount · ${state.discount}%</span><b class="country-deduct">−${money(c.discount)}</b></div>
+         <div><span>Customer shipping paid</span><b>+${money(c.buyerShip)}</b></div>
+         <div class="subtotal-line"><span>Total customer pays</span><b>${money(c.collected)}</b></div>
+         <div><span>Our product cost</span><b class="country-deduct">−${money(c.cost)}</b></div>
+         <div><span>Our courier cost</span><b class="country-deduct">−${money(c.courier)}</b></div>
+       </div>
+       <div class="country-card-total"><span>Estimated profit</span><strong class="${c.profit<0?'profit-negative':''}">${money(c.profit)}</strong></div>
+     </article>`).join('')}
+   </div>
+   <p class="detail-foot">Shipping uses the ${selected.weight} kg parcel weight and QLC's quoted first-kilo + additional-kilo rates, converted at ${state.fx} PKR/USD. Free shipping is checked after the discount. Estimates exclude payment fees, packaging, advertising, taxes and refunds.</p>
+ </section>`;
+}
+function renderedProducts(){
+ const term=state.search.toLocaleLowerCase();
+ let arr=products.filter(p=>(state.category==='All'||p.category===state.category)&&(p.name.toLocaleLowerCase().includes(term)||p.category.toLocaleLowerCase().includes(term)||p.handle.toLocaleLowerCase().includes(term)));
+ const profit=p=>numbers(p,market()).profit;
+ if(state.sort==='profit-high')arr.sort((a,b)=>(profit(b)??-9999)-(profit(a)??-9999));
+ if(state.sort==='profit-low')arr.sort((a,b)=>(profit(a)??9999)-(profit(b)??9999));
+ if(state.sort==='price-high')arr.sort((a,b)=>b.price-a.price);
+ if(state.sort==='price-low')arr.sort((a,b)=>a.price-b.price);
+ if(state.sort==='name')arr.sort((a,b)=>a.name.localeCompare(b.name));
+ return arr;
+}
+function renderProducts(){
+ const m=market();let arr=renderedProducts();$('visibleCount').textContent=`${arr.length} of ${products.length} products`;
+ if(!arr.length){$('productRows').innerHTML='<tr><td colspan="8"><div class="empty">No matching products. Try another search or collection.</div></td></tr>';$('mobileProductRows').innerHTML='<div class="empty">No matching products.</div>';return;}
+ $('productRows').innerHTML=arr.map(p=>{
+ const c=numbers(p,m),open=state.expanded.has(p.id);
+ return `<tr class="product-row ${open?'open':''}" data-id="${p.id}" tabindex="0" role="button" aria-expanded="${open}" aria-label="Show ${htmlEscape(p.name)} profit details">
+ <td>${thumb(p)}</td>
+ <td><div class="prod-name">${htmlEscape(p.name)} <svg class="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div><div class="prod-category">${htmlEscape(p.category)}</div></td>
+ <td><span class="num">${money(c.cost)}</span></td><td><span class="num muted-num">${c.courier===null?'<span class="no-quote">No quote</span>':money(c.courier)}</span></td>
+ <td><span class="num">${c.weight} kg</span></td><td><span class="num">${money(p.price)}</span></td><td><span class="popup-tag">${state.discount}% off</span></td>
+ <td class="profit-cell">${c.profit===null?'<span class="no-quote">Awaiting quote</span>':`<span class="profit-value ${c.profit<0?'loss':''}">${money(c.profit)}</span>`}</td>
+ </tr>${open?`<tr class="detail-row"><td colspan="8">${expandedHtml(p)}</td></tr>`:''}`;
+ }).join('');
+ $('mobileProductRows').innerHTML=arr.map(p=>{
+  const c=numbers(p,m),open=state.expanded.has(p.id);
+  return `<div class="mobile-item"><button type="button" class="mobile-item-btn" data-id="${p.id}" aria-expanded="${open}" aria-label="${open?'Hide':'Show'} ${htmlEscape(p.name)} country profits"><span class="mobile-thumb">${thumb(p)}</span><span class="mobile-item-main"><strong>${htmlEscape(p.name)}</strong><small>${c.weight} kg · ${money(p.price)} · ${state.discount}% discount</small><span class="mobile-small-line"><span>Cost ${money(c.cost)}</span><span>Courier ${money(c.courier)}</span></span></span><span class="mobile-item-profit"><b class="${c.profit<0?'profit-negative':''}">${money(c.profit)}</b><small>${htmlEscape(m.id)} profit</small><span class="mobile-chevron">${open?'−':'+'}</span></span></button>${open?expandedHtml(p):''}</div>`;
+ }).join('');
+}
+function renderAll(){renderStats();renderBars();renderProducts()}
+function selectMarket(id){state.market=id;$('marketSelect').value=id;renderAll()}
+$('marketSelect').addEventListener('change',e=>selectMarket(e.target.value));
+$('marketBars').addEventListener('click',e=>{let el=e.target.closest('[data-market]');if(el)selectMarket(el.dataset.market)});
+$('marketBars').addEventListener('keydown',e=>{let el=e.target.closest('[data-market]');if(el&&(e.key==='Enter'||e.key===' ')){e.preventDefault();selectMarket(el.dataset.market)}});
+function toggleProduct(id){if(state.expanded.has(id))state.expanded.delete(id);else state.expanded.add(id);renderProducts()}
+$('productRows').addEventListener('click',e=>{if(e.target.closest('a'))return;const row=e.target.closest('tr.product-row');if(row)toggleProduct(Number(row.dataset.id))});
+$('productRows').addEventListener('keydown',e=>{const row=e.target.closest('tr.product-row');if(row&&(e.key==='Enter'||e.key===' ')){e.preventDefault();toggleProduct(Number(row.dataset.id))}});
+$('searchInput').addEventListener('input',e=>{state.search=e.target.value.trim();renderProducts()});
+$('categorySelect').addEventListener('change',e=>{state.category=e.target.value;renderProducts()});
+$('sortSelect').addEventListener('change',e=>{state.sort=e.target.value;renderProducts()});
+function setDiscount(value){
+ const n=Number(value);
+ if(!Number.isFinite(n))return;
+ state.discount=Math.round(Math.max(0,Math.min(100,n))*100)/100;
+ try{localStorage.setItem('zaisenDiscountPct',String(state.discount))}catch(_){}
+ $('discountInput').value=state.discount;
+ $('discountSettingsInput').value=state.discount;
+ renderAll();
+}
+for(const id of ['discountInput','discountSettingsInput']){
+ $(id).addEventListener('input',e=>{if(e.target.value!=='')setDiscount(e.target.value)});
+ $(id).addEventListener('change',e=>{if(e.target.value==='')e.target.value=state.discount;setDiscount(e.target.value)});
+}
+$('mobileProductRows').addEventListener('click',e=>{if(e.target.closest('a'))return;const btn=e.target.closest('button[data-id]');if(btn)toggleProduct(Number(btn.dataset.id))});
+$('fxInput').addEventListener('input',e=>{const v=Number(e.target.value);if(!Number.isFinite(v)||v<1||v>1000)return;state.fx=v;renderAll()});
+$('csvButton').addEventListener('click',()=>{
+ const m=market(),cols=['Product','Category','Product cost USD','QLC courier USD','Weight kg','Shopify live price USD','Discount','Discount amount USD','Customer shipping USD','Estimated profit USD','Margin','Shopify URL'];
+ const rows=renderedProducts().map(p=>{const c=numbers(p,m);return [p.name,p.category,c.cost,c.courier??'Quote needed',c.weight,p.price,state.discount+'% off',c.discount,c.buyerShip,c.profit??'Quote needed',c.margin===null?'':(c.margin*100).toFixed(1)+'%',p.url]});
+ const escapeCsv=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+ const csv='\uFEFF'+[cols,...rows].map(r=>r.map(escapeCsv).join(',')).join('\r\n');
+ const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='ZAISEN_'+m.id+'_Product_Profit_'+('Discount'+String(state.discount).replace('.','_'))+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);
+});
+try{const remembered=Number(localStorage.getItem('zaisenDiscountPct'));if(localStorage.getItem('zaisenDiscountPct')!==null&&Number.isFinite(remembered)&&remembered>=0&&remembered<=100){state.discount=remembered;$('discountInput').value=remembered;$('discountSettingsInput').value=remembered}}catch(_){}
+for(const link of document.querySelectorAll('.nav a'))link.addEventListener('click',()=>{document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('current'));link.classList.add('current')});
+renderAll();
+</script>
+</body>
+</html>
