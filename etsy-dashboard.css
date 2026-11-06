@@ -1,0 +1,63 @@
+
+/* ZAISEN dual-channel navigation and Etsy profitability · editorial UI */
+body[data-platform="etsy"] .shopify-only{display:none!important}
+body:not([data-platform="etsy"]) .etsy-only{display:none!important}
+.platform-tabs{display:grid;gap:7px;margin:6px 0 30px}
+.platform-kicker{font-size:9px;letter-spacing:.15em;font-weight:750;color:#a996b9;text-transform:uppercase;padding:0 11px 6px}
+.platform-tab{display:grid;grid-template-columns:26px minmax(0,1fr) 12px;align-items:center;gap:10px;width:100%;border:1px solid rgba(235,224,240,.10);border-radius:11px;padding:11px 10px;min-height:61px;background:transparent;color:#c0c7be;text-align:left;font-size:11px;font-weight:700;line-height:1.25;cursor:pointer;transition:background .2s,border-color .2s,transform .2s,box-shadow .2s}
+.platform-tab span:nth-child(2){min-width:0}
+.platform-tab small{display:block;font-size:10px;font-weight:500;color:#a5aea5;margin-top:4px}
+.platform-icon{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:rgba(120,168,140,.18);border:1px solid rgba(143,190,162,.2);color:#d2e3d5;font-family:Georgia,serif;font-size:17px}
+.platform-icon.etsy-icon{background:rgba(167,130,188,.17);border-color:rgba(176,147,197,.25);color:#dbc8e8}
+.platform-arrow{color:#b3a2bc;font-size:19px;line-height:1}
+.platform-tab:hover{background:rgba(170,143,194,.11);border-color:rgba(191,159,213,.36);color:#fff;transform:translateX(1px)}
+.platform-tab.active{border-color:rgba(197,165,223,.42);background:rgba(178,152,203,.18);color:#fff;box-shadow:inset 3px 0 #b999d7}
+.platform-tab.active .platform-arrow{color:#eee0ff}
+.platform-tab.active small{color:#d0c3d7}
+.platform-tab:focus-visible{outline:2px solid #bea3d4;outline-offset:2px}
+.sidebar .nav-kicker{padding-top:9px;border-top:1px solid rgba(224,213,230,.11)}
+.etsy-bank-picker{min-width:225px;padding:11px 13px;gap:10px}
+.etsy-bank-picker .bank-icon{background:#f3eafb;border:1px solid #e5d5ef;color:#76538e;border-radius:8px;width:30px;height:30px;font-size:18px;font-weight:700;display:grid;place-items:center}
+.etsy-bank-picker select{min-width:174px;max-width:100%;font-size:12px;color:#543d68}
+.etsy-switch-label{display:flex;gap:8px;align-items:center;background:#f5f0f8;border:1px solid #ded1e8;border-radius:9px;padding:10px 12px;font-size:11px;font-weight:750;color:#5c456b;white-space:nowrap;cursor:pointer}
+.etsy-switch-label input{accent-color:#806093;width:16px;height:16px}
+.etsy-fee-line{display:flex;justify-content:space-between;align-items:start;gap:14px;border-bottom:1px solid #ece8ee;padding:13px 0;font-size:11px;color:#69716a}
+.etsy-fee-line strong{font-size:11px;color:#3b423d;text-align:right;font-weight:750}
+.etsy-fee-line:last-of-type{border-bottom:0}
+.etsy-fee-foot{font-size:10px;color:#7a7c77;line-height:1.65;margin:12px 0 0}
+.etsy-fee-tag{background:#f2ecf7!important;color:#614c73!important;border:1px solid #e7d8ed!important;font-variant-numeric:tabular-nums;white-space:nowrap}
+body[data-platform="etsy"] .hero h1 em{color:#775c8d}
+body[data-platform="etsy"] .stat-card:first-child{border-top-color:#ae8cc4}
+body[data-platform="etsy"] .country-card.country-selected{border-color:#9c79b2}
+body[data-platform="etsy"] .country-profit{background:rgba(238,233,246,.35)}
+body[data-platform="etsy"] .market-picker:focus-within{border-color:#a488b8}
+body[data-platform="etsy"] .country-card-total{background:rgba(233,239,230,.65)}
+body[data-platform="etsy"] .detail-summary-info strong{font-size:18px}
+body[data-platform="etsy"] .country-breakdown>div{font-size:11px}
+body[data-platform="etsy"] .country-breakdown b{font-size:11.5px}
+body[data-platform="etsy"] .country-grid{row-gap:14px}
+@media(max-width:1000px){
+ .platform-tabs{display:flex;flex-direction:row;margin:0 8px 0 0;gap:7px}
+ .platform-kicker{display:none}
+ .platform-tab{width:auto;min-height:39px;padding:7px 10px;grid-template-columns:20px auto;gap:7px;font-size:10px;white-space:nowrap;border-radius:9px}
+ .platform-icon{width:21px;height:21px;font-size:14px}
+ .platform-tab small,.platform-arrow{display:none!important}
+ .sidebar .nav-kicker{display:none}
+}
+@media(max-width:720px){
+ .sidebar{flex-wrap:wrap;gap:7px;padding:12px 14px}
+ .sidebar .brand{font-size:23px}
+ .platform-tabs{width:100%;order:3;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .platform-tab{width:100%;white-space:normal;min-height:45px;font-size:11px;padding:8px 9px}
+ .nav{margin-left:auto}
+ .etsy-bank-picker{grid-column:1/-1;min-width:0;width:100%}
+ .etsy-bank-picker select{min-width:0;font-size:12px}
+ .etsy-fee-line{font-size:11px}
+ .country-breakdown>div{padding:8px 0}
+}
+@media(max-width:350px){
+ .platform-tab{font-size:10px;padding:7px}
+ .platform-icon{display:none}
+ .platform-tab{grid-template-columns:minmax(0,1fr)}
+}
+@media(prefers-reduced-motion:reduce){.platform-tab{transition:none!important}}
