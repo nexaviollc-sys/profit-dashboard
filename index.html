@@ -107,6 +107,58 @@
     @media(max-width:370px){.hero-actions{grid-template-columns:1fr}.discount-picker{max-width:200px}}
 
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  
+    /* ZAISEN visual system v3 — subtle amethyst as the third accent.
+       Ivory remains the canvas; forest green continues to signal earnings.
+       Purple identifies selections, navigation and interactive controls. */
+    :root{
+      --violet:#715786;--violet-deep:#523e6a;--violet-soft:#f2edf7;
+      --violet-line:#dfd3eb;--violet-mid:#a995be;
+    }
+    button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{
+      outline:2px solid var(--violet);outline-offset:3px;
+    }
+    .eyebrow{color:#826798}
+    .eyebrow:before{background:#a48cb8}
+    .hero h1 em{color:#715786}
+    .sidebar .nav a.current{background:rgba(179,153,208,.12);border-color:rgba(196,171,222,.19);color:#fff}
+    .sidebar .nav a.current:before{background:#b79bd5}
+    .sidebar .nav a:hover:not(.current){background:rgba(179,153,208,.07)}
+    .brand-sub{color:#c1aecf}
+    .market-picker:focus-within,.discount-picker:focus-within{
+      border-color:var(--violet-mid);box-shadow:0 0 0 3px rgba(112,87,134,.09);
+    }
+    .discount-symbol{background:var(--violet-soft);color:var(--violet-deep)}
+    .discount-picker .mini{color:var(--violet-deep)}
+    .discount-number{border-bottom-color:var(--violet-mid);color:var(--violet-deep)}
+    .stat-card:first-child{border-top:2px solid var(--violet-mid)}
+    .stat-card:first-child .stat-label svg{stroke:var(--violet)}
+    .bar-fill{background:#afa0c0}
+    .bar-line.active .bar-fill{background:#2e7855}
+    .callout{border-left:3px solid #ab96be}
+    .search-wrap:focus-within{border-color:var(--violet-mid);box-shadow:0 0 0 3px rgba(112,87,134,.07)}
+    .right-controls select:focus-visible{outline-color:var(--violet)}
+    .product-row:hover td{background:#fcfafc}
+    .product-row.open td{background:#f7f3fa;border-bottom-color:#e9e0ef}
+    .open .chev{stroke:var(--violet)}
+    .detail-row td{background:#fcfafd!important;border-bottom-color:#e9e0ef!important}
+    .details{border-color:#e6deee}
+    .country-card.country-selected{
+      border:2px solid #9477aa;background:#fefcff;
+      box-shadow:0 0 0 2px rgba(113,87,134,.06);
+    }
+    .country-card.country-selected .country-card-head{border-bottom-color:#e8deef}
+    .current-market-label{color:var(--violet-deep);background:var(--violet-soft)}
+    .country-card.country-selected .country-card-total{
+      background:#f3edf7;border-top-color:#e3d8eb;
+    }
+    .country-card.country-selected .country-card-total span{color:var(--violet-deep)}
+    .switch.on{background:var(--violet)}
+    .mobile-item-btn[aria-expanded="true"]{background:#f8f4fb}
+    .mobile-item-btn[aria-expanded="true"] .mobile-chevron{color:var(--violet)}
+    .mobile-item .details{border-top-color:var(--violet-line)}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
   </style>
 </head>
 <body>
