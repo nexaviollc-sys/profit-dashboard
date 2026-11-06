@@ -289,6 +289,148 @@
       .products-table .product-row td,.thumb{transition:none!important;transform:none!important}
     }
 
+  
+    /* ZAISEN frosted detail cards v5 — clean five-market layout, no orphan grid cell */
+    .details{
+      background:
+        radial-gradient(ellipse at 12% 5%, rgba(147,116,177,.09),transparent 51%),
+        radial-gradient(ellipse at 91% 86%, rgba(87,131,101,.07),transparent 50%),
+        rgba(253,252,251,.92);
+      border:1px solid rgba(202,192,215,.65);
+      box-shadow:0 14px 32px rgba(42,39,51,.05);
+      padding:clamp(15px,1.8vw,25px);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+    .detail-head{margin-bottom:12px}
+    .detail-summary{
+      margin-bottom:18px;
+      padding:10px;
+      gap:0;
+      background:rgba(255,255,255,.56);
+      border:1px solid rgba(224,217,232,.77);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.92);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+    .detail-summary-info{padding:8px 13px;border-right-color:rgba(219,214,225,.75)}
+    .country-heading{margin-bottom:12px}
+    .country-heading p{max-width:355px}
+    .country-grid{
+      display:grid;
+      grid-template-columns:repeat(12,minmax(0,1fr));
+      gap:12px;
+      align-items:stretch;
+    }
+    .country-grid>.country-card{grid-column:span 4}
+    .country-grid>.country-card:nth-child(n+4){grid-column:span 6}
+    .country-card{
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+      border-radius:14px;
+      background:rgba(255,255,255,.66);
+      border:1px solid rgba(232,223,240,.94);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.93),0 6px 18px rgba(49,41,62,.045);
+      backdrop-filter:blur(16px) saturate(125%);
+      -webkit-backdrop-filter:blur(16px) saturate(125%);
+    }
+    .country-card.country-selected{
+      border:1px solid #9274aa;
+      background:rgba(248,243,253,.81);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.97),0 0 0 2px rgba(122,90,149,.08);
+    }
+    .country-card-head{
+      padding:13px 15px;
+      background:rgba(255,255,255,.20);
+      border-bottom:1px solid rgba(222,215,232,.65);
+    }
+    .country-flag{font-size:20px}
+    .country-title{gap:8px}
+    .country-title strong{font-size:13px;letter-spacing:-.01em}
+    .country-title div span{font-size:10px;color:#6c726f}
+    .current-market-label{padding:5px 7px;font-size:9px;border:1px solid #e8d9f0}
+    .country-profit{
+      padding:14px 15px 13px;
+      gap:4px;
+      background:rgba(241,246,240,.29);
+      border-bottom:1px solid rgba(222,222,226,.55);
+    }
+    .country-profit>span{color:#64726a;font-weight:750;letter-spacing:.09em}
+    .country-profit strong{font-size:clamp(26px,2vw,33px);line-height:1.12}
+    .country-profit small{font-size:10px;line-height:1.35;color:#6d786e}
+    .country-breakdown{padding:7px 15px 6px;flex:1}
+    .country-breakdown>div{
+      padding:7px 0;
+      gap:9px;
+      font-size:11px;
+      line-height:1.35;
+      color:#535d57;
+      border-bottom:1px solid rgba(228,223,230,.45);
+    }
+    .country-breakdown>div:last-child{border-bottom:0}
+    .country-breakdown b{font-size:11.5px;font-weight:700;color:#2f3c34}
+    .country-breakdown .subtotal-line{
+      background:rgba(244,239,249,.38);
+      border-top:1px solid rgba(223,215,232,.8);
+      border-bottom:1px solid rgba(223,215,232,.8);
+      padding:9px 7px;
+      margin:3px -7px 5px;
+      border-radius:6px;
+    }
+    .country-card-total{
+      padding:13px 15px;
+      border-top:1px solid rgba(207,221,207,.7);
+      background:rgba(228,241,232,.61);
+      margin-top:auto;
+    }
+    .country-card-total span{font-size:11px}
+    .country-card-total strong{font-size:18px}
+    .country-card.country-selected .country-card-total{
+      background:rgba(239,232,245,.66);
+      border-top-color:rgba(220,208,231,.82);
+    }
+    .country-card:hover{
+      transform:translateY(-1px);
+      border-color:rgba(175,154,192,.9);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.96),0 11px 26px rgba(50,40,61,.09);
+    }
+    .detail-foot{margin-top:13px}
+    @media(max-width:1300px){
+      .country-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .country-grid>.country-card,
+      .country-grid>.country-card:nth-child(n+4){grid-column:auto}
+      .country-grid>.country-card:last-child:nth-child(odd){grid-column:1/-1}
+      .country-profit strong{font-size:30px}
+    }
+    @media(max-width:720px){
+      .details{
+        margin:0;
+        padding:13px 11px;
+        border-radius:0;
+        background:rgba(253,251,255,.78);
+      }
+      .detail-summary{margin-bottom:14px;padding:6px}
+      .detail-summary-info{padding:9px}
+      .country-grid{grid-template-columns:minmax(0,1fr);gap:9px}
+      .country-grid>.country-card,
+      .country-grid>.country-card:nth-child(n+4),
+      .country-grid>.country-card:last-child:nth-child(odd){grid-column:auto}
+      .country-card-head{padding:12px 14px}
+      .country-profit{padding:12px 14px}
+      .country-profit strong{font-size:29px}
+      .country-breakdown{padding:6px 14px}
+      .country-breakdown>div{padding:7px 0}
+      .country-card-total{padding:12px 14px}
+      .country-heading{margin-bottom:10px}
+      .country-heading h4{font-size:23px}
+    }
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+      .country-card{background:#faf9fb}
+      .country-card.country-selected{background:#f4eef8}
+      .detail-summary{background:#fbfafc}
+    }
+
   </style>
 </head>
 <body>
