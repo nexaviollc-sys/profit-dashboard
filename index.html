@@ -6,6 +6,9 @@
   <meta name="theme-color" content="#f7f5f0">
   <meta name="description" content="ZAISEN product profitability dashboard: 39 Shopify products, market-by-market courier and contribution estimates.">
   <title>ZAISEN | Profit Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root{--bg:#f7f5f0;--paper:#fffefa;--white:#fff;--ink:#262b27;--muted:#7f817d;--line:#e8e8e1;--dark:#272e2a;--dark2:#343c35;--leaf:#2f7652;--leaf-light:#eaf5ed;--earth:#8b6c4d;--gold:#c8ab74;--shadow:0 8px 35px rgba(36,46,40,.035);--serif:Georgia,'Times New Roman',serif;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
     *{box-sizing:border-box} [hidden]{display:none!important} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button,select{cursor:pointer} a{color:inherit}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #92bba2;outline-offset:3px} .app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
@@ -158,6 +161,133 @@
     .mobile-item-btn[aria-expanded="true"] .mobile-chevron{color:var(--violet)}
     .mobile-item .details{border-top-color:var(--violet-line)}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+  
+    /* ZAISEN editorial finish v4 — precise type, considered borders and calm hovers */
+    :root{
+      --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+      --sans:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      --focus-ring:rgba(112,87,134,.13);
+      --edge:#e6e2e5;
+      --edge-hover:#cfc0dc;
+      --elevation:0 5px 20px rgba(39,40,45,.045);
+      --elevation-hover:0 12px 30px rgba(52,45,62,.085);
+      --ease:cubic-bezier(.22,.61,.36,1);
+    }
+    html{font-optical-sizing:auto}
+    body{font-family:var(--sans);font-size:13px;letter-spacing:-.011em;font-weight:400;text-rendering:optimizeLegibility}
+    button,input,select{font-family:var(--sans)}
+    button{font-weight:650}
+    .brand{font-family:var(--serif);font-size:34px;letter-spacing:.07em;font-weight:400}
+    .brand-sub,.nav-kicker,.eyebrow,.stat-label,.products-table th,
+    .market-picker .mini,.discount-label .mini{letter-spacing:.1em}
+    .hero h1{font-family:var(--serif);font-size:clamp(39px,3.6vw,57px);letter-spacing:-.022em;line-height:1.06;font-weight:400}
+    .hero h1 em{font-weight:400}
+    .section-head h2,.assumptions h2{font-family:var(--serif);font-weight:400;letter-spacing:-.017em;font-size:30px;line-height:1.12}
+    .country-heading h4{font:400 25px/1.16 var(--serif)}
+    .detail-head h3{font:400 25px/1.2 var(--serif)}
+    .intro{font-size:13px;line-height:1.75;color:#626b66}
+    .crumb,.snapshot{font-size:11px}
+    .panel-title{font-size:13px;letter-spacing:-.012em}
+    .panel-note,.section-head p,.setting-info,.stat-foot{font-size:11px;color:#727b74}
+    .stat-label{font-size:10px;color:#69726d}
+    .stat-value{font-weight:700;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+    .stat-card .stat-foot{line-height:1.5}
+    .prod-name{font-size:13px;font-weight:700;letter-spacing:-.018em;line-height:1.42}
+    .prod-category{font-size:11px;color:#737e75}
+    .products-table th{font-size:10px;color:#68706b;font-weight:700}
+    .products-table td{font-size:12.5px;font-variant-numeric:tabular-nums}
+    .profit-value{font-size:15px;font-weight:800;letter-spacing:-.03em}
+    .country-title strong{font-size:14px;font-weight:700}
+    .country-profit strong{font-weight:700;letter-spacing:-.047em}
+    .country-breakdown>div{font-size:12px;color:#657068}
+    .country-breakdown b{font-weight:700}
+    .detail-summary-info span{color:#657368}
+    .detail-summary-info strong{font-weight:700}
+    .nav a{font-size:12px;font-weight:600;letter-spacing:.003em}
+    .search-wrap input,.right-controls select{font-size:12px}
+    .download-btn{font-size:12px;letter-spacing:.012em}
+    .market-picker select,.discount-number{font-weight:700}
+    .stat-card,.panel,.table-card,.market-picker,.discount-picker,
+    .country-card,.mobile-item,.search-wrap,.right-controls select{
+      border-color:var(--edge);
+      box-shadow:var(--elevation);
+      transition:border-color 180ms var(--ease),box-shadow 220ms var(--ease),
+                 background-color 180ms var(--ease),transform 220ms var(--ease);
+    }
+    .stat-card:hover,.panel:hover{
+      border-color:#d8cedd;box-shadow:var(--elevation-hover);
+      transform:translateY(-1px);
+    }
+    .table-card:hover{border-color:#d9d2dd;box-shadow:var(--elevation-hover)}
+    .market-picker:hover,.discount-picker:hover,.search-wrap:hover,
+    .right-controls select:hover{border-color:var(--edge-hover)}
+    .market-picker:focus-within,.discount-picker:focus-within,.search-wrap:focus-within{
+      border-color:#9a7fb0;
+      box-shadow:0 0 0 3px var(--focus-ring);
+    }
+    .sidebar .nav a{
+      transition:background-color 180ms var(--ease),color 180ms var(--ease),
+                 border-color 180ms var(--ease),box-shadow 180ms var(--ease);
+    }
+    .sidebar .nav a:hover:not(.current){
+      color:#fbf8fc;background:rgba(186,157,214,.10);border-color:rgba(194,169,214,.16)
+    }
+    .sidebar .nav a.current{
+      box-shadow:inset 0 0 0 1px rgba(197,165,223,.06)
+    }
+    .bar-line{transition:background-color 180ms var(--ease)}
+    .bar-line:hover .bar-track{background:#e4deea}
+    .bar-line:hover .bar-name,.bar-line:hover .bar-amount{color:var(--violet-deep)}
+    .bar-line:hover .bar-fill{filter:saturate(1.13)}
+    .download-btn{
+      transition:background-color 180ms var(--ease),border-color 180ms var(--ease),
+                 box-shadow 180ms var(--ease),transform 180ms var(--ease);
+    }
+    .download-btn:hover{background:#254e3a;border-color:#254e3a;box-shadow:0 7px 18px rgba(36,80,55,.16);transform:translateY(-1px)}
+    .download-btn:active{transform:translateY(0);box-shadow:none}
+    .products-table .product-row td{
+      transition:background-color 170ms var(--ease),border-color 170ms var(--ease),
+                 box-shadow 170ms var(--ease);
+    }
+    .products-table .product-row:hover td{background:#faf7fc}
+    .products-table .product-row:hover td:first-child{box-shadow:inset 3px 0 0 #b89cc9}
+    .products-table .product-row.open td{background:#f5f0f8;border-bottom-color:#e8def0}
+    .products-table .product-row.open td:first-child{box-shadow:inset 3px 0 0 #80639c}
+    .products-table .product-row:focus-visible td{background:#f7f1fb}
+    .country-card:hover{
+      border-color:var(--edge-hover);box-shadow:0 11px 25px rgba(52,45,62,.085);
+      transform:translateY(-1px)
+    }
+    .country-card.country-selected:hover{border-color:#9477aa}
+    .country-card .country-card-head{transition:background-color 180ms var(--ease)}
+    .mobile-item:hover{border-color:#d2c1df;box-shadow:0 8px 22px rgba(52,45,62,.07)}
+    .mobile-item-btn{transition:background-color 170ms var(--ease)}
+    .mobile-item-btn:hover{background:#faf7fc}
+    .mobile-item-btn[aria-expanded="true"]:hover{background:#f2ebf7}
+    .setting input:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+    .thumb{border-color:#e4e0df;transition:border-color 180ms var(--ease)}
+    .product-row:hover .thumb,.mobile-item:hover .thumb{border-color:#c6b6ce}
+    @media(max-width:720px){
+      .brand{font-size:31px}
+      .hero h1{font-size:clamp(35px,8.4vw,45px)}
+      .section-head h2,.assumptions h2{font-size:28px}
+      .intro{font-size:12px}
+      .mobile-item-main strong{font-size:13px;font-weight:700;line-height:1.36}
+      .mobile-item-profit b{font-size:16px;font-weight:800}
+      .mobile-item-main small,.mobile-small-line{color:#69766d}
+      .country-title strong{font-size:14px}
+      .country-profit strong{font-size:31px}
+      .stat-card:hover,.panel:hover,.country-card:hover{transform:none}
+    }
+    @media(hover:none){
+      .stat-card:hover,.panel:hover,.country-card:hover,.download-btn:hover{transform:none}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .stat-card,.panel,.table-card,.market-picker,.discount-picker,.country-card,
+      .mobile-item,.search-wrap,.right-controls select,.download-btn,.sidebar .nav a,
+      .products-table .product-row td,.thumb{transition:none!important;transform:none!important}
+    }
 
   </style>
 </head>
